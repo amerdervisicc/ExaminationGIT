@@ -4,9 +4,20 @@ const todos = [
   { text: "Lösa en mergekonflikt", done: false },
 ];
 
+// Ladda todos från localStorage vid start
+const savedTodos = localStorage.getItem('todos');
+if (savedTodos) {
+  todos.length = 0;
+  todos.push(...JSON.parse(savedTodos));
+}
+
 const listEl = document.getElementById("todoList");
 const addBtn = document.getElementById("addBtn");
 const inputEl = document.getElementById("todoInput");
+
+function saveTodos() {
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
 
 function render() {
   listEl.innerHTML = "";
@@ -24,6 +35,7 @@ function render() {
     toggle.textContent = t.done ? "Ångra" : "Klar";
     toggle.onclick = () => {
       todos[i].done = !todos[i].done;
+      saveTodos();
       render();
     };
 
@@ -31,6 +43,7 @@ function render() {
     del.textContent = "Ta bort";
     del.onclick = () => {
       todos.splice(i, 1);
+      saveTodos();
       render();
     };
 
@@ -48,6 +61,7 @@ addBtn.addEventListener("click", () => {
   const val = inputEl.value.trim();
   if (!val) return;
   addTodo(val);
+  saveTodos();
   inputEl.value = "";
   render();
 });
