@@ -7,6 +7,13 @@ const todos = [
 const listEl = document.getElementById("todoList");
 const addBtn = document.getElementById("addBtn");
 const inputEl = document.getElementById("todoInput");
+const counterEl = document.getElementById("counter");
+
+function updateCounter() {
+  const activeCount = todos.filter(t => !t.done).length;
+  const doneCount = todos.filter(t => t.done).length;
+  counterEl.textContent = `Aktiva: ${activeCount} | Klara: ${doneCount}`;
+}
 
 function render() {
   listEl.innerHTML = "";
@@ -24,6 +31,7 @@ function render() {
     toggle.textContent = t.done ? "Ångra" : "Klar";
     toggle.onclick = () => {
       todos[i].done = !todos[i].done;
+      updateCounter();
       render();
     };
 
@@ -31,12 +39,14 @@ function render() {
     del.textContent = "Ta bort";
     del.onclick = () => {
       todos.splice(i, 1);
+      updateCounter();
       render();
     };
 
     li.append(label, spacer, toggle, del);
     listEl.appendChild(li);
   });
+  updateCounter();
 }
 
 // CONFLICT-SEED: Ändra den här hjälpfunktionen i två olika branches för att skapa en konflikt.
@@ -49,6 +59,7 @@ addBtn.addEventListener("click", () => {
   if (!val) return;
   addTodo(val);
   inputEl.value = "";
+  updateCounter();
   render();
 });
 

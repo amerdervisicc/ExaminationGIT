@@ -49,7 +49,7 @@ Spara. Klart!
 ---
 
 ## Valt case (fyll i)
-**Jag bygger:** Todo Lite / Bookmarks Mini / Pomodoro Timer
+**Jag bygger:** Todo Lite med räknare-funktion
 
 ### User stories + AC (exempel för _Todo Lite_)
 - **US1**: Som användare vill jag kunna **lägga till** en todo så att jag kan planera.  

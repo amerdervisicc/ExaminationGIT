@@ -8,6 +8,17 @@ body {
 
 .container { max-width: 720px; margin: 0 auto; }
 
+.counter {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #667eea;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background: #f0f0f0;
+  border-radius: 6px;
+}
+
 .actions { display: flex; gap: 0.5rem; margin: 1rem 0; }
 input { flex: 1; padding: 0.6rem 0.8rem; }
 button { padding: 0.6rem 1rem; cursor: pointer; }
