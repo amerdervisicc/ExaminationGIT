@@ -8,9 +8,22 @@ const listEl = document.getElementById("todoList");
 const addBtn = document.getElementById("addBtn");
 const inputEl = document.getElementById("todoInput");
 
+let currentFilter = 'all';
+
 function render() {
   listEl.innerHTML = "";
-  todos.forEach((t, i) => {
+  
+  // Filtrera todos baserat på currentFilter
+  const filtered = todos.filter(todo => {
+    if (currentFilter === 'active') return !todo.done;
+    if (currentFilter === 'done') return todo.done;
+    return true; // 'all'
+  });
+  
+  filtered.forEach((t, i) => {
+    // Hitta original index i todos-arrayen
+    const originalIndex = todos.indexOf(t);
+    
     const li = document.createElement("li");
     li.className = "item" + (t.done ? " done" : "");
 
@@ -23,14 +36,14 @@ function render() {
     const toggle = document.createElement("button");
     toggle.textContent = t.done ? "Ångra" : "Klar";
     toggle.onclick = () => {
-      todos[i].done = !todos[i].done;
+      todos[originalIndex].done = !todos[originalIndex].done;
       render();
     };
 
     const del = document.createElement("button");
     del.textContent = "Ta bort";
     del.onclick = () => {
-      todos.splice(i, 1);
+      todos.splice(originalIndex, 1);
       render();
     };
 
@@ -50,6 +63,17 @@ addBtn.addEventListener("click", () => {
   addTodo(val);
   inputEl.value = "";
   render();
+});
+
+// Filter-knappar
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentFilter = btn.dataset.filter;
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  });
 });
 
 render();
