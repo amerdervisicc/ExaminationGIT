@@ -4,11 +4,21 @@ const todos = [
   { text: "Lösa en mergekonflikt", done: false },
 ];
 
+// Ladda todos från localStorage vid start
+const savedTodos = localStorage.getItem('todos');
+if (savedTodos) {
+  todos.length = 0;
+  todos.push(...JSON.parse(savedTodos));
+}
+
 const listEl = document.getElementById("todoList");
 const addBtn = document.getElementById("addBtn");
 const inputEl = document.getElementById("todoInput");
 
 let currentFilter = 'all';
+function saveTodos() {
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
 
 function render() {
   listEl.innerHTML = "";
@@ -61,6 +71,7 @@ addBtn.addEventListener("click", () => {
   const val = inputEl.value.trim();
   if (!val) return;
   addTodo(val);
+  saveTodos();
   inputEl.value = "";
   render();
 });
