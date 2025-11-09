@@ -9,12 +9,12 @@
 ---
 
 ## Start här (checklista)
-- [ ] **Välj 1 av 3 case** och skapa **Trello-bräda** *(obligatoriskt)*.
-- [ ] Lägg in **user stories** med **Acceptance Criteria (AC)** (checkboxar) + kort **INVEST**-motivering.
-- [ ] Jobba **en feature per branch** → **PR med mall** → **minst 1 review** → **squash-merge**.
-- [ ] Skapa & lös **1 mergekonflikt**, **dokumentera i PR** (vad/hur/varför).
-- [ ] Skriv **reflection.md** enligt mallen.
-- [ ] Länka **Trello** och **mina reviews** i **README**.
+- [x] **Välj 1 av 3 case** och skapa **Trello-bräda** *(obligatoriskt)*.
+- [x] Lägg in **user stories** med **Acceptance Criteria (AC)** (checkboxar) + kort **INVEST**-motivering.
+- [x] Jobba **en feature per branch** → **PR med mall** → **minst 1 review** → **squash-merge**.
+- [x] Skapa & lös **1 mergekonflikt**, **dokumentera i PR** (vad/hur/varför).
+- [x] Skriv **reflection.md** enligt mallen.
+- [x] Länka **Trello** och **mina reviews** i **README**.
 
 > **Trello vs Issues**  
 > **Trello är obligatoriskt** i denna examination. GitHub Issues är **valfritt** som komplement (t.ex. “Closes #123”).  
@@ -49,7 +49,7 @@ Spara. Klart!
 ---
 
 ## Valt case (fyll i)
-**Jag bygger:** Todo Lite med filter-funktion
+**Jag bygger:** Todo Lite med filter och räknare-funktion
 
 ### User stories + AC (exempel för _Todo Lite_)
 - **US1**: Som användare vill jag kunna **lägga till** en todo så att jag kan planera.  
@@ -134,11 +134,10 @@ Spara. Klart!
 ---
 
 ## Länkar (fyll i)
-- **Trello-bräda:** <länk>  
+- **Trello-bräda:** https://trello.com/b/3t8DM4zK/examinationgit
 - **Mina reviews:**  
-  - Given: <PR-länk>  
-  - Mottagen: <PR-länk>  
-  - *(VG: lägg till en till given)*
+  - Given: 
+  - Mottagen: https://github.com/amerdervisicc/ExaminationGIT/pull/1
 
 ---
 
