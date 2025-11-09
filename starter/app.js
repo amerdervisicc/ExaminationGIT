@@ -14,6 +14,13 @@ if (savedTodos) {
 const listEl = document.getElementById("todoList");
 const addBtn = document.getElementById("addBtn");
 const inputEl = document.getElementById("todoInput");
+const counterEl = document.getElementById("counter");
+
+function updateCounter() {
+  const activeCount = todos.filter(t => !t.done).length;
+  const doneCount = todos.filter(t => t.done).length;
+  counterEl.textContent = `Aktiva: ${activeCount} | Klara: ${doneCount}`;
+}
 
 let currentFilter = 'all';
 function saveTodos() {
@@ -46,6 +53,8 @@ function render() {
     const toggle = document.createElement("button");
     toggle.textContent = t.done ? "Ångra" : "Klar";
     toggle.onclick = () => {
+      todos[i].done = !todos[i].done;
+      updateCounter();
       todos[originalIndex].done = !todos[originalIndex].done;
       render();
     };
@@ -53,6 +62,8 @@ function render() {
     const del = document.createElement("button");
     del.textContent = "Ta bort";
     del.onclick = () => {
+      todos.splice(i, 1);
+      updateCounter();
       todos.splice(originalIndex, 1);
       render();
     };
@@ -60,6 +71,7 @@ function render() {
     li.append(label, spacer, toggle, del);
     listEl.appendChild(li);
   });
+  updateCounter();
 }
 
 // CONFLICT-SEED: Ändra den här hjälpfunktionen i två olika branches för att skapa en konflikt.
@@ -73,6 +85,7 @@ addBtn.addEventListener("click", () => {
   addTodo(val);
   saveTodos();
   inputEl.value = "";
+  updateCounter();
   render();
 });
 
