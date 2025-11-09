@@ -4,6 +4,13 @@ const todos = [
   { text: "Lösa en mergekonflikt", done: false },
 ];
 
+// Ladda todos från localStorage vid start
+const savedTodos = localStorage.getItem('todos');
+if (savedTodos) {
+  todos.length = 0;
+  todos.push(...JSON.parse(savedTodos));
+}
+
 const listEl = document.getElementById("todoList");
 const addBtn = document.getElementById("addBtn");
 const inputEl = document.getElementById("todoInput");
@@ -15,9 +22,25 @@ function updateCounter() {
   counterEl.textContent = `Aktiva: ${activeCount} | Klara: ${doneCount}`;
 }
 
+let currentFilter = 'all';
+function saveTodos() {
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
+
 function render() {
   listEl.innerHTML = "";
-  todos.forEach((t, i) => {
+  
+  // Filtrera todos baserat på currentFilter
+  const filtered = todos.filter(todo => {
+    if (currentFilter === 'active') return !todo.done;
+    if (currentFilter === 'done') return todo.done;
+    return true; // 'all'
+  });
+  
+  filtered.forEach((t, i) => {
+    // Hitta original index i todos-arrayen
+    const originalIndex = todos.indexOf(t);
+    
     const li = document.createElement("li");
     li.className = "item" + (t.done ? " done" : "");
 
@@ -32,6 +55,7 @@ function render() {
     toggle.onclick = () => {
       todos[i].done = !todos[i].done;
       updateCounter();
+      todos[originalIndex].done = !todos[originalIndex].done;
       render();
     };
 
@@ -40,6 +64,7 @@ function render() {
     del.onclick = () => {
       todos.splice(i, 1);
       updateCounter();
+      todos.splice(originalIndex, 1);
       render();
     };
 
@@ -58,9 +83,21 @@ addBtn.addEventListener("click", () => {
   const val = inputEl.value.trim();
   if (!val) return;
   addTodo(val);
+  saveTodos();
   inputEl.value = "";
   updateCounter();
   render();
+});
+
+// Filter-knappar
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentFilter = btn.dataset.filter;
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  });
 });
 
 render();
