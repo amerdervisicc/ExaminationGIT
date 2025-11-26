@@ -79,7 +79,7 @@ function addTodo(text) {
   todos.unshift({ text, done: false });
 }
 
-addBtn.addEventListener("click", () => {
+function handleAddTodo() {
   const val = inputEl.value.trim();
   if (!val) return;
   addTodo(val);
@@ -87,6 +87,15 @@ addBtn.addEventListener("click", () => {
   inputEl.value = "";
   updateCounter();
   render();
+}
+
+addBtn.addEventListener("click", handleAddTodo);
+
+// Lägg till todo med Enter-tangenten
+inputEl.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    handleAddTodo();
+  }
 });
 
 // Filter-knappar
